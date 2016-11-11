@@ -1,11 +1,12 @@
 import React from 'react';
 import './iconfont.css';
-import './index.css'
+import './index.css';
+
 var FileItem = React.createClass({
     render(){
-        const {name,path} = this.props;
+        const {name,path,onChange} = this.props;
         return(
-            <li className="file-item">
+            <li className="file-item" onClick={()=>onChange(path)}>
                 <i className="iconfont">&#xe600;</i>
                 <p>{name}</p>
             </li>
@@ -14,18 +15,20 @@ var FileItem = React.createClass({
 });
 var FileList = React.createClass({
     render(){
-        const {path,file} = this.props;
+        const {path,file,onChange,loading} = this.props;
         var nodes = file.map(function (obj) {
             return (
                 <FileItem
                     name={obj.name}
                     path={obj.path}
+                    onChange={onChange}
                     key={path+"-"+obj.name}
                 />
             )
         });
         return(
             <div className="file-content">
+                <loading/>
                 <ul className="file-list">
                     {nodes}
                 </ul>

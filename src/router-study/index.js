@@ -10,18 +10,12 @@ const SubMenu = Menu.SubMenu;
 var Sider = React.createClass({
     getInitialState() {
         return {
-            theme: 'light',
-            current: '2'
+            theme: 'light'
         };
     },
     changeTheme(value) {
         this.setState({
             theme: value ? 'dark' : 'light',
-        });
-    },
-    handleClick(e) {
-        this.setState({
-            current: "",
         });
     },
     render() {
