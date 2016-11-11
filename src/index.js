@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 //import AntStudy from './ant-study';
 
 //import Crad from  './ant-study/index2.js'
-import RouterStudy from './router-study'
+import RouterStudy from './router-study';
 import AntTest from './ant-test'
+import  Cloud from './dawn-cloud'
 ReactDOM.render(
-  <RouterStudy />,
+  <Cloud />,
   document.getElementById('root')
 );

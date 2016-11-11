@@ -21,7 +21,7 @@ var Sider = React.createClass({
     },
     handleClick(e) {
         this.setState({
-            current: "  ",
+            current: "",
         });
     },
     render() {
