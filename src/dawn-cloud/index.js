@@ -1,16 +1,18 @@
 import React from 'react';
 import FileList from './list-file';
+import Nav from './nav';
 import {getFileList} from './api';
 import './index.css';
 import Loading from './loading';
 import {Router, Route, hashHistory} from 'react-router';
 
 
+
 var R = React.createClass({
     render(){
         return(
             <Router history={hashHistory}>
-                <Route path="/" component={Cloud}/>
+                <Route path="*" component={Cloud}/>
             </Router>
         )
     }
@@ -19,7 +21,7 @@ var Cloud = React.createClass({
     getInitialState(){
       return{
           file:[],
-          path:'',
+          path:[],
           loading:true
       }
     },
@@ -30,16 +32,17 @@ var Cloud = React.createClass({
                     <Loading/>
                 </div>
                 <h3>步惊云</h3>
+                <Nav
+                    value={this.state.path}
+                />
                 <FileList
                     file={this.state.file}
                     path={this.state.path}
-                    onChange={this.getFile}
                 />
             </div>
         )
     },
     getFile(path){
-        hashHistory.push(path);
         var that =this;
         that.setState({
             loading:false
@@ -47,15 +50,22 @@ var Cloud = React.createClass({
         getFileList(path,function (res) {
             that.setState({
                 file:res.file,
-                path:res.path,
+                path:res.path.split("/"),
                 loading:true
             })
         },function (err) {
-            console.log("失败");
+            console.log(err);
         })
     },
     componentDidMount(){
-        this.getFile("/")
+        const{params} = this.props;
+        const{splat} = params;
+        this.getFile(splat)
+    },
+    componentWillReceiveProps(nextProps){
+        const{params} = nextProps;
+        const{splat} = params;
+        this.getFile(splat)
     }
 });
 export default R;
