@@ -16,10 +16,10 @@
     border-radius: 4px;
     text-align: center;
 }
-.file-content .file-list .file-item:hover{
+.file-content .file-list .file-item:hover,.file-content .file-list .file-item.active{
     background-color: #57c5f7;
 }
-.file-content .file-list .file-item:hover .iconfont{
+.file-content .file-list .file-item:hover .iconfont,.file-content .file-list .file-item.active .iconfont{
     color: #fff;
 }
 .file-content .file-list .file-item .iconfont{

@@ -27,28 +27,38 @@ function getIcon(ext,isFolder) {
 }
 var FileItem = React.createClass({
     render(){
-        const {name,path,ext,isFolder} = this.props;
+        const {name,path,ext,isFolder,onPick,active} = this.props;
         var type = getIcon(ext,isFolder);
+        const act = name == active;
         return(
-            <li className="file-item" onClick={this.handelClick}>
+            <li
+                className={act?"file-item active":"file-item"}
+                onClick={this.handelClick}
+                onMouseDown={this.mousedown}
+            >
                 {type}
                 <p>{name}</p>
             </li>
         )
     },
-    handelClick(){
-        const {name,path,ext,isFolder} = this.props;
+    mousedown(e){
+        const {name,path,ext,isFolder,onPick,active} = this.props;
+        if(e.button == 2){
+            onPick(name)
+        }
+    },
+    handelClick(e){
+        const {name,path,ext,isFolder,active,onPick} = this.props;
         if(isFolder){
             hashHistory.push(path)
         }else{
             window.open(host+path)
         }
     }
-
 });
 var FileList = React.createClass({
     render(){
-        const {path,file,loading} = this.props;
+        const {path,file,loading,onPick,active} = this.props;
         var nodes = file.map(function (obj) {
             return (
                 <FileItem
@@ -57,6 +67,8 @@ var FileList = React.createClass({
                     key={path+"-"+obj.name}
                     ext={obj.ext}
                     isFolder={obj.isFolder}
+                    onPick={onPick}
+                    active={active}
                 />
             )
         });

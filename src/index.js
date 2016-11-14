@@ -5,8 +5,9 @@ import ReactDOM from 'react-dom';
 //import Crad from  './ant-study/index2.js'
 import RouterStudy from './router-study';
 import AntTest from './ant-test'
-import  Cloud from './dawn-cloud'
+import  Cloud from './dawn-cloud';
+import './index.css';
 ReactDOM.render(
-  <Cloud />,
+  <AntTest />,
   document.getElementById('root')
 );
